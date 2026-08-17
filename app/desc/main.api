@@ -1,0 +1,6 @@
+syntax = "v1"
+
+info (
+	title: "mas_demo_m2l7"
+	desc:  "小红书笔记报告。POST /api/v1/xhs/notes/report 为 multipart+SSE，goctl 无法表达，handler 手写。"
+)

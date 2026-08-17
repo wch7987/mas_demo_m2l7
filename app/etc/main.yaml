@@ -1,0 +1,22 @@
+Name: main
+Host: 0.0.0.0
+Port: 8888
+# go-zero HTTP 超时（毫秒）。10 分钟。
+Timeout: 600000
+
+LLM:
+  Model: qwen3.7-plus
+  ImageModel: qwen3-vl-plus
+  # APIKey: sk-xxx  # 也可通过 QWEN_API_KEY / DASHSCOPE_API_KEY 环境变量设置
+  Region: cn
+  # BaseURL: https://dashscope.aliyuncs.com/compatible-mode/v1
+  Temperature: 0.7
+  Timeout: 600
+  RetryCount: 2
+
+XHS:
+  DataOutputDir: ./data/output
+  ImageMaxSize: 1024
+  ImageQuality: 85
+  MaxImages: 20
+  MaxIter: 3

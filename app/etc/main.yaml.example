@@ -1,0 +1,20 @@
+Name: main
+Host: 0.0.0.0
+Port: 8888
+Timeout: 600000
+
+LLM:
+  Model: qwen3.7-plus
+  ImageModel: qwen3-vl-plus
+  # APIKey: sk-xxx
+  Region: cn
+  Temperature: 0.7
+  Timeout: 600
+  RetryCount: 2
+
+XHS:
+  DataOutputDir: ./data/output
+  ImageMaxSize: 1024
+  ImageQuality: 85
+  MaxImages: 20
+  MaxIter: 3
