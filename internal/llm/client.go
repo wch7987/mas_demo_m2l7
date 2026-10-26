@@ -15,15 +15,15 @@ import (
 
 // Client calls Aliyun DashScope OpenAI-compatible chat completions API.
 type Client struct {
-	endpoint   string
-	apiKey     string
-	model      string
-	imageModel string
+	endpoint    string
+	apiKey      string
+	model       string
+	imageModel  string
 	temperature *float32
-	stop       []string
-	timeout    time.Duration
-	retryCount int
-	httpClient *http.Client
+	stop        []string
+	timeout     time.Duration
+	retryCount  int
+	httpClient  *http.Client
 }
 
 // NewClient creates an HTTP client from config.
@@ -150,11 +150,11 @@ func (c *Client) postOnce(ctx context.Context, body ChatCompletionRequest, dest 
 	case resp.StatusCode == 429:
 		return &retryableError{msg: fmt.Sprintf("LLM 请求限流: %s", truncate(raw, 200))}
 	case resp.StatusCode >= 400:
-		logx.Errorf("llm_request_4xx status_code=%d body=%s", resp.StatusCode, truncate(raw, 500))
+		logx.Errorf("llm_request_4xx status_code=%d model=%s body=%s", resp.StatusCode, body.Model, truncate(raw, 500))
 		if resp.StatusCode == 403 {
-			return fmt.Errorf("LLM 模型访问被拒绝(403): %s；请检查 Model 配置或请求体 model 字段，确认账号已开通该模型", truncate(raw, 500))
+			return fmt.Errorf("LLM 模型访问被拒绝(403) model=%s: %s；请确认当前 Key/专属网关已开通该模型", body.Model, truncate(raw, 500))
 		}
-		return fmt.Errorf("LLM 请求错误 %d: %s", resp.StatusCode, truncate(raw, 500))
+		return fmt.Errorf("LLM 请求错误 %d model=%s: %s", resp.StatusCode, body.Model, truncate(raw, 500))
 	}
 
 	if err := json.Unmarshal(raw, dest); err != nil {

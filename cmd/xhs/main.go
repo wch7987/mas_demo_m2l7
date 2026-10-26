@@ -39,9 +39,6 @@ func main() {
 		fmt.Fprintf(os.Stderr, "配置错误: %v\n", err)
 		os.Exit(1)
 	}
-	if os.Getenv("QWEN_IMAGE_MODEL") == "" {
-		llmCfg.ImageModel = "qwen3-vl-plus"
-	}
 
 	chatModel, err := llm.NewEinoChatModel(llmCfg)
 	if err != nil {

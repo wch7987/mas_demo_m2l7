@@ -13,8 +13,8 @@ import (
 )
 
 type visualBatchSubmit struct {
-	ImagesVisual []ImageVisualAnalysis `json:"images_visual" jsonschema:"description=每张输入图片一条视觉分析，顺序与输入一致，条数必须相同"`
-	Summary      string                `json:"summary" jsonschema:"description=不超过50字的整体视觉基调总结"`
+	ImagesVisual VisualList `json:"images_visual" jsonschema:"description=每张输入图片一条视觉分析，必须是 JSON 数组（不要再包一层字符串），顺序与输入一致"`
+	Summary      string     `json:"summary" jsonschema:"description=不超过50字的整体视觉基调总结"`
 }
 
 func runVisualPhase(ctx context.Context, cm model.ChatModel, maxIter int, idea string, images []ImageInput, onProgress ProgressFunc) (*VisualBatchReport, error) {
@@ -28,7 +28,7 @@ func runVisualPhase(ctx context.Context, cm model.ChatModel, maxIter int, idea s
 	state := &visualBatchSubmit{}
 	submit, err := utils.InferTool(
 		"submit_visual_batch",
-		"一次性提交全部图片的视觉分析。images_visual 条数必须等于输入图片数，这是本步唯一合法的最终交付。",
+		"一次性提交全部图片的视觉分析。images_visual 必须是 JSON 数组对象，不要把数组编码成字符串。条数必须等于输入图片数。",
 		func(_ context.Context, out *visualBatchSubmit) (string, error) {
 			*state = *out
 			return "视觉分析批次已提交", nil

@@ -6,7 +6,7 @@ Timeout: 600000
 
 LLM:
   Model: qwen3.7-plus
-  ImageModel: qwen3-vl-plus
+  ImageModel: qwen3.7-plus
   # APIKey: sk-xxx  # 也可通过 QWEN_API_KEY / DASHSCOPE_API_KEY 环境变量设置
   Region: cn
   # BaseURL: https://dashscope.aliyuncs.com/compatible-mode/v1

@@ -12,7 +12,7 @@ import (
 )
 
 func TestContractJSONTags(t *testing.T) {
-	v := ImageVisualAnalysis{ImageID: "img_0", FileName: "a.jpg", VisualDetails: []string{"x"}}
+	v := ImageVisualAnalysis{ImageID: "img_0", FileName: "a.jpg", VisualDetails: StringList{"x"}}
 	raw, err := json.Marshal(v)
 	if err != nil {
 		t.Fatal(err)
@@ -35,8 +35,8 @@ func TestBuildReport(t *testing.T) {
 	}, &SEOOptimizedNote{
 		OptimizedTitle:        "标题",
 		OptimizedContent:      "正文",
-		OptimizedPictureOrder: []string{"img_0"},
-		Tags:                  []string{"饮食"},
+		OptimizedPictureOrder: StringList{"img_0"},
+		Tags:                  StringList{"饮食"},
 	})
 	if !strings.Contains(report, "地中海饮食") || !strings.Contains(report, "img_0") || !strings.Contains(report, "生成笔记标题") {
 		t.Fatal(report)

@@ -18,7 +18,7 @@ Go + Eino 实现的小红书爆款笔记主链路（对应 Python `crewai_mas_de
 - `QWEN_API_KEY` 或 `DASHSCOPE_API_KEY`（必填）
 - 可选：`DASHSCOPE_BASE_URL`、`QWEN_MODEL`、`QWEN_IMAGE_MODEL`、`QWEN_REGION`
 
-视觉/修图默认 `qwen3-vl-plus`（`app/etc/main.yaml` 的 `LLM.ImageModel`，CLI 在未设 `QWEN_IMAGE_MODEL` 时同样默认该值）。文本阶段用 `LLM.Model`。
+视觉/修图与文本默认都用 `qwen3.7-plus`（与 mas_demo 同一套已开通模型；`qwen3.7-plus` 本身支持多模态）。若账号已开通 VL 专用模型，可设 `QWEN_IMAGE_MODEL` 或改 yaml 的 `LLM.ImageModel`。
 
 ## CLI
 
@@ -26,6 +26,10 @@ Go + Eino 实现的小红书爆款笔记主链路（对应 Python `crewai_mas_de
 export QWEN_API_KEY=...
 go run ./cmd/xhs -idea "想卖这个墨绿色马克杯，主打独居女生，强调氛围感" \
   -images /path/to/a.jpg,/path/to/b.jpg
+  
+curl -N -F 'idea_text=北京马拉松大正再次PB，感慨大正的努力，主打努力，没有白练的' \
+  -F 'images=@/Users/cms/Desktop/dazheng.jpg' \
+  http://127.0.0.1:8888/api/v1/xhs/notes/report 
 ```
 
 ## HTTP（SSE）

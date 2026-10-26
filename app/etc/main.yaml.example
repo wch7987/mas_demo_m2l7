@@ -5,7 +5,7 @@ Timeout: 600000
 
 LLM:
   Model: qwen3.7-plus
-  ImageModel: qwen3-vl-plus
+  ImageModel: qwen3.7-plus
   # APIKey: sk-xxx
   Region: cn
   Temperature: 0.7

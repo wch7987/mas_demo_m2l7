@@ -8,7 +8,7 @@ func TestAlignVisualBatchByIndex(t *testing.T) {
 		{ImageID: "img_1", FileName: "b.jpg"},
 	}
 	got, err := alignVisualBatch("卖杯子", images, &visualBatchSubmit{
-		ImagesVisual: []ImageVisualAnalysis{
+		ImagesVisual: VisualList{
 			{SubjectDescription: "绿杯", AtmosphereVibe: "静", HighlightFeature: "裂纹"},
 			{SubjectDescription: "特写", AtmosphereVibe: "暖", HighlightFeature: "反光"},
 		},
@@ -41,7 +41,7 @@ func TestAlignEditBatchByID(t *testing.T) {
 		{ImageID: "img_1", FileName: "b.jpg"},
 	}
 	got, err := alignEditBatch(images, &editBatchSubmit{
-		ImagesEditPlan: []ImageEditPlan{
+		ImagesEditPlan: EditList{
 			{ImageID: "img_1", OverallEditStrategy: "提亮第二张"},
 			{ImageID: "img_0", OverallEditStrategy: "裁第一张"},
 		},

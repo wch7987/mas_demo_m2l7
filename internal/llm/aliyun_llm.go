@@ -196,6 +196,21 @@ func (m *einoChatModel) Stream(ctx context.Context, input []*schema.Message, opt
 	return schema.StreamReaderFromArray([]*schema.Message{message}), nil
 }
 
+func (m *chatModelWithModel) WithTools(tools []*schema.ToolInfo) (model.ToolCallingChatModel, error) {
+	inner, ok := m.ChatModel.(model.ToolCallingChatModel)
+	if !ok {
+		return nil, fmt.Errorf("underlying ChatModel does not support WithTools")
+	}
+	cloned, err := inner.WithTools(tools)
+	if err != nil {
+		return nil, err
+	}
+	if em, ok := cloned.(*einoChatModel); ok {
+		return &chatModelWithModel{ChatModel: em, name: m.name}, nil
+	}
+	return cloned, nil
+}
+
 func (m *einoChatModel) BindTools(tools []*schema.ToolInfo) error {
 	m.tools = tools
 	return nil
