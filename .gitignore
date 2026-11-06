@@ -23,3 +23,5 @@ coverage.out
 data/output/
 app/logs/
 app/etc/main.yaml.local
+# Demo 2（cmd/todo）多租户工作空间运行产物
+/workspace/
